@@ -79,8 +79,11 @@ export class DotNetSuggestionProvider implements ISuggestionProvider {
       }
     );
 
-    const autoCompleteUrls = await Promise.all(promised);
+    var autoCompleteUrls = await Promise.all(promised);
     if (autoCompleteUrls.length === 0) return null;
+
+    // filter out unresolvable urls
+    autoCompleteUrls = autoCompleteUrls.filter((url) => url.length > 0);
 
     const clientData: NuGetClientData = { serviceUrls: autoCompleteUrls }
 
