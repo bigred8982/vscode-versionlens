@@ -47,12 +47,9 @@ export class NuGetResourceClient {
       })
       .catch((error: HttpClientResponse) => {
 
-        
-        const msg = error.data === undefined ? (error as any).message : error.data;
         this.logger.error(
-          "Could not resolve nuget service index (%s). %s",
-          source.url,
-          msg
+          "Could not resolve nuget service index. %O",
+          error
         )
 
         return "";
